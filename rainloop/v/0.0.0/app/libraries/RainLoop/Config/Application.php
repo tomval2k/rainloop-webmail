@@ -99,7 +99,8 @@ class Application extends \RainLoop\Config\AbstractConfig
 	 */
 	public function SetPassword($sPassword)
 	{
-		return $this->Set('security', 'admin_password', \md5(APP_SALT.$sPassword.APP_SALT));
+//		return $this->Set('security', 'admin_password', \md5(APP_SALT.$sPassword.APP_SALT));
+		return $this->Set('security', 'admin_password', password_hash($$sPassword, PASSWORD_DEFAULT));
 	}
 
 	/**
@@ -109,11 +110,14 @@ class Application extends \RainLoop\Config\AbstractConfig
 	 */
 	public function ValidatePassword($sPassword)
 	{
+		return password_verify($sPassword, $this->Get('security', 'admin_password', ''));
+/*
 		$sPassword = (string) $sPassword;
 		$sConfigPassword = (string) $this->Get('security', 'admin_password', '');
 
 		return 0 < \strlen($sPassword) &&
 			(($sPassword === $sConfigPassword && '12345' === $sConfigPassword) || \md5(APP_SALT.$sPassword.APP_SALT) === $sConfigPassword);
+*/
 	}
 
 	/**
