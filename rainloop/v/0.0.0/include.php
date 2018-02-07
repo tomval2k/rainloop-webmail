@@ -123,7 +123,9 @@
 
 				unset($sCheckName, $sCheckFilePath, $sCheckFolder, $sTest);
 			}
-
+// Should not be using a SALT.php file with a poorly generated SALT, and/or md5 hashing.
+// PHP has its own secure password hashing function which updates with future PHP releases.
+/*
 			if (false === $sSalt)
 			{
 				// random salt
@@ -134,7 +136,7 @@
 
 				@file_put_contents(APP_DATA_FOLDER_PATH.'SALT.php', $sSalt);
 			}
-
+*/
 			define('APP_SALT', md5($sSalt.APP_PRIVATE_DATA_NAME.$sSalt));
 			define('APP_PRIVATE_DATA', APP_DATA_FOLDER_PATH.'_data_'.($sData ? md5($sData) : '').'/'.APP_PRIVATE_DATA_NAME.'/');
 
