@@ -100,7 +100,7 @@ class Application extends \RainLoop\Config\AbstractConfig
 	public function SetPassword($sPassword)
 	{
 //		return $this->Set('security', 'admin_password', \md5(APP_SALT.$sPassword.APP_SALT));
-		return $this->Set('security', 'admin_password', password_hash($$sPassword, PASSWORD_DEFAULT));
+		return $this->Set('security', 'admin_password', password_hash($sPassword, PASSWORD_DEFAULT));
 	}
 
 	/**
