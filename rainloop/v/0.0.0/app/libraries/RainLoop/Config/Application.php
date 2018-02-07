@@ -110,7 +110,20 @@ class Application extends \RainLoop\Config\AbstractConfig
 	 */
 	public function ValidatePassword($sPassword)
 	{
-		return password_verify($sPassword, $this->Get('security', 'admin_password', ''));
+// the default password is loaded if no application.ini found
+		$sConfigPassword = $this->Get('security', 'admin_password', '');
+		$result = false;
+
+		if (password_verify($sPassword, $this->Get('security', 'admin_password', '')))
+		{
+			$result = true;
+		}
+		else if ( (isset($sConfigPassword)) && ($sPassword == $sConfigPassword) )
+		{
+			 $result = true;
+		}
+		return $result;
+//		return password_verify($sPassword, $this->Get('security', 'admin_password', ''));
 /*
 		$sPassword = (string) $sPassword;
 		$sConfigPassword = (string) $this->Get('security', 'admin_password', '');
