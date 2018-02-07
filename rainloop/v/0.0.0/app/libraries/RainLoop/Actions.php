@@ -4019,7 +4019,7 @@ NewThemeLink IncludeCss LoadingDescriptionEsc TemplatesLink LangLink IncludeBack
 				$oConfig->Set('security', 'admin_login', $sLogin);
 			}
 
-			if (0 < \strlen(\trim($sNewPassword)))
+			if (0 < \strlen($sNewPassword))
 			{
 				$oConfig->SetPassword($sNewPassword);
 			}
